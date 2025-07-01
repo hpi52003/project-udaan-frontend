@@ -1,6 +1,6 @@
 import streamlit as st  # type: ignore
 import requests  # type: ignore
-
+# URL where Backend get executed
 BACKEND_URL = "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="Translation UI", layout="centered")
@@ -21,7 +21,7 @@ except Exception as e:
     supported_languages = {}
     supported_codes = set()
 
-# Show supported languages
+# Show supported languages to notify by the user
 if supported_languages:
     st.subheader("📚 Supported Languages")
     for lang, code in supported_languages.items():
@@ -35,7 +35,7 @@ option = st.sidebar.selectbox("Select Operation", (
     "View Logs"
 ))
 
-# ---- SINGLE TRANSLATE ----
+# SINGLE TRANSLATE
 if option == "Single Translate":
     st.subheader("✏️ Single Translate")
     text = st.text_area("Enter text (max 1000 characters):")
@@ -62,7 +62,7 @@ if option == "Single Translate":
         except Exception as e:
             st.error(f"⚠️ Request Failed: {e}")
 
-# ---- BULK TRANSLATE ----
+# BULK TRANSLATE
 elif option == "Bulk Translate":
     st.subheader("📦 Bulk Translate")
     text_input = st.text_area("Enter sentences (one per line, max 1000 characters each):")
@@ -93,7 +93,7 @@ elif option == "Bulk Translate":
         except Exception as e:
             st.error(f"⚠️ Request Failed: {e}")
 
-# ---- HEALTH CHECK ----
+# HEALTH CHECK
 elif option == "Health Check":
     st.subheader("🩺 Health Check")
     try:
@@ -105,7 +105,7 @@ elif option == "Health Check":
     except Exception as e:
         st.error(f"⚠️ Could not connect to backend: {e}")
 
-# ---- VIEW LOGS ----
+# VIEW LOGS
 elif option == "View Logs":
     st.subheader("📜 Translation Logs")
     try:
